@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Local Viewer · 本地文件浏览器</title>
+<title>Local Viewer · Local File Browser</title>
 <style>
   :root{
     --bg:#14161a; --panel:#1b1e24; --panel2:#20242c; --border:#2a2f3a;
@@ -76,44 +76,44 @@
 <body>
 
 <header>
-  <div class="brand">📂 <b>Local Viewer</b><span class="sub">仅预览 · 文件不出本机</span></div>
+  <div class="brand">📂 <b>Local Viewer</b><span class="sub">Preview only · Files never leave this machine</span></div>
   <div class="acts">
-    <button id="btnRefresh" class="ghost" title="重新扫描目录树">⟳ 刷新</button>
-    <button id="btnPick">📁 选择文件夹…</button>
+    <button id="btnRefresh" class="ghost" title="Rescan the directory tree">⟳ Refresh</button>
+    <button id="btnPick">📁 Choose Folder…</button>
   </div>
 </header>
 
 <main>
   <aside id="aside">
-    <div class="panel-title" id="treeTitle">📂 资源管理器</div>
-    <div id="tree"><div class="hint">未选择文件夹</div></div>
+    <div class="panel-title" id="treeTitle">📂 Explorer</div>
+    <div id="tree"><div class="hint">No folder selected</div></div>
   </aside>
-  <div id="resize" title="拖动调整宽度"></div>
+  <div id="resize" title="Drag to resize"></div>
   <section id="pvPanel">
     <div id="pvHead" style="display:none">
       <div id="pvName"></div>
       <div id="pvMeta"></div>
       <div id="pvActs">
-        <button id="btnOpenNewTab" class="ghost" title="在浏览器新标签页独立打开（不显示目录界面，适合整页截图）">↗ 新标签打开</button>
-        <button id="btnOpenDir" class="ghost" title="打开文件所在的文件夹（可查看完整磁盘路径）">📂 所在目录</button>
-        <button id="btnCopy" class="ghost">📋 复制相对路径</button>
+        <button id="btnOpenNewTab" class="ghost" title="Open in a standalone browser tab (no directory UI, ideal for full-page screenshots)">↗ Open in New Tab</button>
+        <button id="btnOpenDir" class="ghost" title="Open the folder containing this file (shows its full path on disk)">📂 Show in Folder</button>
+        <button id="btnCopy" class="ghost">📋 Copy Relative Path</button>
       </div>
     </div>
-    <div id="pvBody"><div class="hint">← 在左侧文件树中选择一个文件预览<br>支持 Markdown / HTML / 图片 / PDF / 代码 / 音视频<br><br>「↗ 新标签打开」独立窗口显示，可整页截图<br>「📂 所在目录」定位文件在磁盘上的位置</div></div>
+    <div id="pvBody"><div class="hint">← Select a file in the tree on the left to preview it<br>Supports Markdown / HTML / images / PDF / code / audio &amp; video<br><br><b>"↗ Open in New Tab"</b> shows the file in a standalone window for full-page screenshots<br><b>"📂 Show in Folder"</b> locates the file on disk</div></div>
   </section>
 </main>
 
 <div id="start" style="display:none">
   <div class="card">
     <h1>📂 Local Viewer</h1>
-    <p>一个跑在浏览器里的 <b>本地文件浏览器</b>，只读不写、数据不出本机。<br><br>
-    左侧为 VS Code 风格文件树：<b>目录点击展开/收起，文件单击即可预览</b>，树宽可拖动调节。<br>
-    选中文件后点右上角 <b>「↗ 新标签打开」</b> 可在独立窗口显示（HTML/Markdown 全渲染、无目录界面，方便整页截图）；<b>「📂 所在目录」</b> 可定位文件在磁盘上的位置。<br><br>
-    支持格式：<b>Markdown</b>、<b>HTML</b>、<b>图片</b>、<b>PDF</b>、<b>代码</b>、文本、音视频。</p>
-    <p>部署方式：把本文件复制到你想要浏览的<b>每个目录</b>根位置，双击即可用；各目录的授权记忆互相独立。</p>
-    <p class="warn">⚠ 授权后仅以只读方式访问文件夹，Obsidian 等软件可照常使用。</p>
-    <button id="btnPickStart" class="primary">📁 选择根文件夹开始</button>
-    <p style="margin-top:14px;text-align:center">实验目标：<code>C:\Users\lihui\github\workspace</code></p>
+    <p>A <b>local file browser</b> that runs entirely in your browser — read-only, nothing ever leaves this machine.<br><br>
+    The left side is a VS Code-style file tree: <b>click a directory to expand/collapse it, single-click a file to preview it</b>; drag the divider to resize the tree.<br>
+    With a file selected, <b>"↗ Open in New Tab"</b> shows it in a standalone window (HTML/Markdown fully rendered, no directory UI — handy for full-page screenshots); <b>"📂 Show in Folder"</b> locates the file on disk.<br><br>
+    Supported formats: <b>Markdown</b>, <b>HTML</b>, <b>images</b>, <b>PDF</b>, <b>code</b>, plain text, audio &amp; video.</p>
+    <p>Deployment: copy this file into the root of <b>each folder</b> you want to browse and double-click it; each copy remembers its own authorization independently.</p>
+    <p class="warn">⚠ Once authorized, the folder is accessed strictly read-only — Obsidian and other tools can keep using it as usual.</p>
+    <button id="btnPickStart" class="primary">📁 Choose Root Folder to Start</button>
+    <p style="margin-top:14px;text-align:center">Experiment target: <code>C:\Users\lihui\github\workspace</code></p>
   </div>
 </div>
 
@@ -121,12 +121,12 @@
 
 <script>
 "use strict";
-/* ================= 全局状态 ================= */
+/* ================= Global state ================= */
 let rootHandle=null, rootName='', currentKey='', currentFileKey='';
-const cache=new Map();          // 相对路径 -> FileSystemHandle
-const objURLs=[];               // object URL 池，预览切换时回收
+const cache=new Map();          // relative path -> FileSystemHandle
+const objURLs=[];               // object URL pool, revoked when the preview switches
 
-/* ================= 常量 ================= */
+/* ================= Constants ================= */
 const IMG=new Set(['png','jpg','jpeg','gif','webp','svg','avif','bmp','ico']);
 const VIDEO=new Set(['mp4','webm','ogv','mov','m4v']);
 const AUDIO=new Set(['mp3','wav','ogg','oga','flac','m4a','aac','opus']);
@@ -164,7 +164,7 @@ li{margin:.15em 0}
 .hljs-deletion{color:#ff7b72}
 .hljs-emphasis{font-style:italic}`;
 
-/* ================= 小工具 ================= */
+/* ================= Utilities ================= */
 const $=s=>document.querySelector(s);
 let toastTimer;
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);}
@@ -174,21 +174,21 @@ function iconFor(name,kind){if(kind==='directory')return '📁';
   if(e==='pdf')return '📕'; if(VIDEO.has(e))return '🎞️'; if(AUDIO.has(e))return '🎵';
   if(TEXT.has(e))return '💻'; return '📄';}
 function sizeStr(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';if(n<1073741824)return (n/1048576).toFixed(1)+' MB';return (n/1073741824).toFixed(2)+' GB';}
-function timeStr(t){const d=new Date(t);return d.toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});}
+function timeStr(t){const d=new Date(t);return d.toLocaleString('en-US',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function dirOf(key){return key.includes('/')?key.slice(0,key.lastIndexOf('/')):'';}
 
-async function readDir(dirHandle,rel){           // 读取并排序（目录优先），同时填充缓存
+async function readDir(dirHandle,rel){           // read and sort (directories first), also fills the cache
   const out=[];
   for await(const [name,h] of dirHandle.entries()){
     const key=rel?rel+'/'+name:name;
     cache.set(key,h);
     out.push({name,kind:h.kind,key});
   }
-  out.sort((a,b)=>a.kind!==b.kind?(a.kind==='directory'?-1:1):a.name.localeCompare(b.name,'zh-CN',{numeric:true}));
+  out.sort((a,b)=>a.kind!==b.kind?(a.kind==='directory'?-1:1):a.name.localeCompare(b.name,{numeric:true}));
   return out;
 }
-async function dirByKey(key){                    // 按相对路径解析目录句柄
+async function dirByKey(key){                    // resolve a directory handle by relative path
   if(!key)return rootHandle;
   const c=cache.get(key);
   if(c&&c.kind==='directory')return c;
@@ -196,7 +196,7 @@ async function dirByKey(key){                    // 按相对路径解析目录�
   for(const seg of key.split('/'))d=await d.getDirectoryHandle(seg);
   return d;
 }
-async function resolveFileByRel(baseRel,url){    // 相对路径 -> File（支持 ../ ./）
+async function resolveFileByRel(baseRel,url){    // relative path -> File (supports ../ and ./)
   if(!rootHandle)return null;
   if(/^(https?:|data:|blob:|javascript:|mailto:|#|\/\/)/i.test(url))return null;
   let u=url; try{u=decodeURIComponent(url);}catch{}
@@ -211,9 +211,9 @@ async function resolveFileByRel(baseRel,url){    // 相对路径 -> File（支�
   }catch{return null;}
 }
 
-/* ================= IndexedDB：按部署位置分别记忆根目录（每目录一份 index.html 互不干扰） ================= */
+/* ================= IndexedDB: remember the root folder per deployment location (each copy of index.html is independent) ================= */
 const IDB_NAME='local-viewer-db', IDB_STORE='roots';
-function dbKey(){ // 当前 index.html 所在目录，作为记忆键
+function dbKey(){ // directory containing the current index.html, used as the memory key
   return location.href.split('#')[0].replace(/\/[^/]*$/,'');
 }
 function dbOpen(){return new Promise((res,rej)=>{const r=indexedDB.open(IDB_NAME,1);
@@ -223,20 +223,20 @@ async function dbSave(handle){try{const db=await dbOpen();await new Promise((res
 async function dbLoad(){try{const db=await dbOpen();const key=dbKey();
   const cur=await new Promise((res,rej)=>{const rq=db.transaction(IDB_STORE).get(key);rq.onsuccess=()=>res(rq.result||null);rq.onerror=()=>rej(rq.error);});
   if(cur)return cur;
-  // 旧版单一记录迁移
+  // migrate the legacy single record
   const old=await new Promise((res,rej)=>{const rq=db.transaction(IDB_STORE).get('last');rq.onsuccess=()=>res(rq.result||null);rq.onerror=()=>rej(rq.error);});
   if(old){dbSave(old);return old;}
   return null;
 }catch{return null;}}
 
-/* ================= CDN 库（失败自动降级） ================= */
+/* ================= CDN libraries (automatic fallback on failure) ================= */
 function loadScript(src){return new Promise(res=>{const s=document.createElement('script');s.src=src;s.onload=()=>res(true);s.onerror=()=>res(false);document.head.appendChild(s);});}
 (async()=>{
   if(!window.marked){ const ok=await loadScript('https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js')||await loadScript('https://unpkg.com/marked@12.0.2/marked.min.js'); if(!ok)window.marked=null; }
   if(!window.hljs){ const ok=await loadScript('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js')||await loadScript('https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js'); if(!ok)window.hljs=null; }
 })();
 
-/* ================= Markdown 渲染 ================= */
+/* ================= Markdown rendering ================= */
 function miniInline(s){s=esc(s);
   s=s.replace(/`([^`\n]+)`/g,'<code>$1</code>')
      .replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>')
@@ -264,16 +264,16 @@ function renderMini(md){
   flush();return out.join('\n');
 }
 
-/* ================= 预览 ================= */
+/* ================= Preview ================= */
 async function preview(h,key,name){
   currentFileKey=key;
   $('#pvHead').style.display='block';
   $('#pvName').textContent=name;
   $('#pvMeta').textContent='';
-  $('#pvBody').innerHTML='<div class="loading">读取中…</div>';
+  $('#pvBody').innerHTML='<div class="loading">Loading…</div>';
   objURLs.forEach(URL.revokeObjectURL); objURLs.length=0;
-  let f; try{f=await h.getFile();}catch(e){return showHint('无法读取该文件：'+e.message);}
-  $('#pvMeta').innerHTML='<span>📎 '+esc(dirOf(key)||'(根目录)')+'</span><span>📦 '+sizeStr(f.size)+'</span><span>🕒 '+timeStr(f.lastModified)+'</span>';
+  let f; try{f=await h.getFile();}catch(e){return showHint('Cannot read this file: '+e.message);}
+  $('#pvMeta').innerHTML='<span>📎 '+esc(dirOf(key)||'(root)')+'</span><span>📦 '+sizeStr(f.size)+'</span><span>🕒 '+timeStr(f.lastModified)+'</span>';
   const e=(name.split('.').pop()||'').toLowerCase();
   if(e==='pdf')return showPdf(f);
   if(IMG.has(e))return showImage(f,name);
@@ -282,7 +282,7 @@ async function preview(h,key,name){
   if(MD.has(e))return showMd(f,dirOf(key),name);
   if(HTML.has(e))return showHtml(f,dirOf(key),name);
   if(TEXT.has(e))return showCode(f,name);
-  if(BIN.has(e))return showHint('该格式不支持内嵌预览（.'+e+'）。\n\n可点击右上角「📂 所在目录」定位文件后，用系统程序打开。');
+  if(BIN.has(e))return showHint('No inline preview for this format (.'+e+').\n\nUse "📂 Show in Folder" above to locate the file, then open it with a system application.');
   return sniffThen(f,name);
 }
 function putFrame(docStr){
@@ -303,7 +303,7 @@ function showMedia(f,name,audio){const u=URL.createObjectURL(f);objURLs.push(u);
   const box=document.createElement('div');box.className='fit';box.style.flexDirection='column';box.appendChild(el);
   $('#pvBody').innerHTML='';$('#pvBody').appendChild(box);}
 async function showMd(f,baseRel,name){
-  let text; try{text=(await readTextSmart(f)).trim();}catch(e){return showHint('读取失败：'+e.message);}
+  let text; try{text=(await readTextSmart(f)).trim();}catch(e){return showHint('Failed to read: '+e.message);}
   const html=window.marked?marked.parse(text):renderMini(text);
   const tmp=document.createElement('template');tmp.innerHTML=html;
   if(window.hljs)tmp.content.querySelectorAll('pre code').forEach(el=>{try{hljs.highlightElement(el);}catch{}});
@@ -311,7 +311,7 @@ async function showMd(f,baseRel,name){
   putFrame('<!DOCTYPE html><html><head><meta charset="utf-8"><style>'+MD_CSS+'</style></head><body class="doc">'+tmp.innerHTML+'</body></html>');
 }
 async function showHtml(f,baseRel,name){
-  let text; try{text=await readTextSmart(f);}catch(e){return showHint('读取失败：'+e.message);}
+  let text; try{text=await readTextSmart(f);}catch(e){return showHint('Failed to read: '+e.message);}
   if(!/<html[\s>]/i.test(text)){
     const tmp=document.createElement('template');tmp.innerHTML=text;await rewriteImages(tmp.content,baseRel);
     return putFrame('<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#fff;color:#1f2328;font-family:system-ui}</style></head><body>'+tmp.innerHTML+'</body></html>');
@@ -322,24 +322,24 @@ async function showHtml(f,baseRel,name){
   putFrame(doc.documentElement.outerHTML);
 }
 async function showCode(f,name){
-  let text; try{text=await readTextSmart(f);}catch(e){return showHint('读取失败：'+e.message);}
+  let text; try{text=await readTextSmart(f);}catch(e){return showHint('Failed to read: '+e.message);}
   $('#pvBody').innerHTML='<div class="codebox"><pre><code></code></pre></div>';
   const el=$('#pvBody pre code');
   if(window.hljs){ try{el.textContent=text.slice(0,1e6);hljs.highlightElement(el);}catch{el.textContent=text;el.className='';} }
   else{el.textContent=text;el.className='';}
-  if(text.length>1e6){const note=document.createElement('div');note.className='hint';note.textContent='⚠ 文件较大，仅显示前 1,000,000 字符';$('#pvBody').appendChild(note);}
+  if(text.length>1e6){const note=document.createElement('div');note.className='hint';note.textContent='⚠ Large file — only the first 1,000,000 characters are shown';$('#pvBody').appendChild(note);}
 }
 function showHint(msg){$('#pvBody').innerHTML='<div class="hint" style="white-space:pre-wrap">'+esc(msg)+'</div>';}
 async function sniffThen(f,name){
-  try{const head=await f.slice(0,4096).text();if(head.includes('\u0000'))return showHint('二进制文件，不支持内嵌预览。');return showCode(f,name);}catch{return showHint('二进制文件，不支持内嵌预览。');}
+  try{const head=await f.slice(0,4096).text();if(head.includes('\u0000'))return showHint('Binary file — inline preview is not supported.');return showCode(f,name);}catch{return showHint('Binary file — inline preview is not supported.');}
 }
 async function sniffBinary(f){try{return (await f.slice(0,4096).text()).includes('\u0000');}catch{return true;}}
 
-/* ================= 「新标签打开」：独立浏览器窗口显示（无目录 UI，可整页截图） ================= */
+/* ================= "Open in New Tab": standalone browser window (no directory UI, suitable for full-page screenshots) ================= */
 function mimeOf(ext){const m={png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',gif:'image/gif',webp:'image/webp',svg:'image/svg+xml',avif:'image/avif',bmp:'image/bmp',ico:'image/x-icon',html:'text/html',htm:'text/html',md:'text/markdown',css:'text/css',js:'text/javascript',json:'application/json',pdf:'application/pdf',mp4:'video/mp4',webm:'video/webm',mp3:'audio/mpeg',wav:'audio/wav',ogg:'audio/ogg'};return m[ext]||'application/octet-stream';}
 function bufToB64(buf){let s='';const CH=0x8000;for(let i=0;i<buf.length;i+=CH){s+=String.fromCharCode.apply(null,new Uint8Array(buf.subarray(i,i+CH)));}return btoa(s);}
 async function fileToDataURL(f,mime){const b=await f.arrayBuffer();return 'data:'+(mime||f.type||'application/octet-stream')+';base64,'+bufToB64(b);}
-async function rewriteImagesData(container,baseRel){ // 相对路径图片 → data:URI（新标签跨文档可用）
+async function rewriteImagesData(container,baseRel){ // relative-path images -> data: URI (works across documents in the new tab)
   const imgs=Array.from(container.querySelectorAll('img'));
   for(const im of imgs){
     const src=im.getAttribute('src')||im.getAttribute('data-src');
@@ -371,18 +371,18 @@ async function buildHtmlDoc(text,baseRel){
   }
   const doc=new DOMParser().parseFromString(text,'text/html');
   doc.querySelectorAll('base').forEach(b=>b.remove());
-  await inlineCss(doc,baseRel);          // link→style 文本内联
-  await rewriteImagesData(doc,baseRel);  // 相对图片 → data:URI
+  await inlineCss(doc,baseRel);          // inline <link> stylesheets as <style> text
+  await rewriteImagesData(doc,baseRel);  // relative images -> data: URI
   return '<!DOCTYPE html>\n'+doc.documentElement.outerHTML;
 }
-async function openNewTab(){ // 必须在用户点击中同步 window.open 以保留手势
-  if(!currentFileKey){toast('请先选择一个文件');return;}
+async function openNewTab(){ // window.open must run synchronously inside the click handler to preserve the user gesture
+  if(!currentFileKey){toast('Select a file first');return;}
   const key=currentFileKey,name=key.split('/').pop();
   const ext=(name.split('.').pop()||'').toLowerCase();
   const win=window.open('','_blank');
-  if(!win){toast('新窗口被拦截：请在地址栏右侧允许本页弹窗后重试');return;}
+  if(!win){toast('Popup blocked: allow popups for this page (icon at the right of the address bar), then try again');return;}
   try{
-    const h=cache.get(key);if(!h)throw new Error('文件句柄丢失');
+    const h=cache.get(key);if(!h)throw new Error('File handle no longer available');
     const f=await h.getFile();
     const baseRel=dirOf(key);let html;
     if(MD.has(ext)||HTML.has(ext)){
@@ -407,8 +407,8 @@ async function openNewTab(){ // 必须在用户点击中同步 window.open 以�
       html='<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:0"><iframe src="'+u+'" style="position:fixed;inset:0;width:100%;height:100%;border:0"></iframe></body></html>';
     }
     writeBlank(win,html,name);
-    toast('已在新标签页打开');
-  }catch(e){try{win.close();}catch{}toast('打开失败：'+e.message);}
+    toast('Opened in a new tab');
+  }catch(e){try{win.close();}catch{}toast('Failed to open: '+e.message);}
 }
 async function readTextSmart(f){
   if(f.size>8*1048576)return new TextDecoder().decode(await f.slice(0,8*1048576).arrayBuffer());
@@ -441,7 +441,7 @@ async function inlineCss(doc,baseRel){
   }
 }
 
-/* ================= 文件树（VS Code 风格，目录文件同栏混排） ================= */
+/* ================= File tree (VS Code style, directories and files mixed in one list) ================= */
 function clearSel(){document.querySelectorAll('#tree .ti.sel').forEach(t=>t.classList.remove('sel'));}
 
 function addNode(parentSub,it,depth){
@@ -469,10 +469,10 @@ async function toggleDir(head){
       const h=await dirByKey(key);
       const items=await readDir(h,key);
       for(const it of items)addNode(sub,it,key?key.split('/').length:0);
-      if(!items.length){const em=document.createElement('div');em.className='hint';em.style.cssText='text-align:left;padding:2px 14px;font-size:12px';em.textContent='(空)';sub.appendChild(em);}
+      if(!items.length){const em=document.createElement('div');em.className='hint';em.style.cssText='text-align:left;padding:2px 14px;font-size:12px';em.textContent='(empty)';sub.appendChild(em);}
     }catch(e){
       row.dataset.loaded='';
-      const em=document.createElement('div');em.className='hint';em.style.cssText='text-align:left;padding:2px 14px;font-size:12px;color:#ff7b72';em.textContent='读取失败：'+e.message;sub.appendChild(em);
+      const em=document.createElement('div');em.className='hint';em.style.cssText='text-align:left;padding:2px 14px;font-size:12px;color:#ff7b72';em.textContent='Failed to read: '+e.message;sub.appendChild(em);
     }
   }
   const open=row.classList.toggle('open');
@@ -486,7 +486,7 @@ function collectOpenKeys(){
 }
 async function renderTree(openKeys){
   const tree=$('#tree');tree.innerHTML='';
-  $('#treeTitle').textContent='📂 '+rootName+' — 资源管理器';
+  $('#treeTitle').textContent='📂 '+rootName+' — Explorer';
   const rootRow=document.createElement('div');rootRow.className='tn dir';
   rootRow.innerHTML='<div class="ti root" data-key=""><span class="arrow">▶</span><span class="ic">🗂</span><span class="nm">'+esc(rootName)+'</span></div><div class="sub"></div>';
   const head=rootRow.firstElementChild;
@@ -506,7 +506,7 @@ async function renderTree(openKeys){
   }
 }
 
-/* ================= 分隔条拖拽 ================= */
+/* ================= Divider drag-resize ================= */
 const aside=$('#aside'),rz=$('#resize');
 (function initResize(){
   let dragging=false;
@@ -521,26 +521,26 @@ const aside=$('#aside'),rz=$('#resize');
   rz.addEventListener('pointercancel',stop);
 })();
 
-/* ================= 根目录 ================= */
+/* ================= Root folder ================= */
 async function setRoot(h){
   rootHandle=h;rootName=h.name;cache.clear();currentFileKey='';
-  $('#pvHead').style.display='none';$('#pvBody').innerHTML='<div class="hint">← 在左侧文件树中选择一个文件预览</div>';
+  $('#pvHead').style.display='none';$('#pvBody').innerHTML='<div class="hint">← Select a file in the tree on the left to preview it</div>';
   $('#start').style.display='none';
   await renderTree(new Set());
   dbSave(h);
 }
 async function pickRoot(){
   if(!('showDirectoryPicker' in window)){
-    toast('当前环境不支持文件系统 API：请在真实 Edge/Chrome 中打开本文件，或改用本地服务器访问');
+    toast('File System Access API unavailable here: open this file in real Edge/Chrome, or serve it from a local server');
     return;
   }
   try{
     const h=await window.showDirectoryPicker({mode:'read'});
-    await setRoot(h);toast('已载入根目录：'+h.name);
-  }catch(e){ if(e.name!=='AbortError')toast('无法读取目录：'+e.message); }
+    await setRoot(h);toast('Root folder loaded: '+h.name);
+  }catch(e){ if(e.name!=='AbortError')toast('Cannot read directory: '+e.message); }
 }
 
-/* ================= 事件绑定 ================= */
+/* ================= Event bindings ================= */
 $('#btnPick').addEventListener('click',pickRoot);
 $('#btnPickStart').addEventListener('click',pickRoot);
 $('#btnRefresh').addEventListener('click',async()=>{
@@ -551,42 +551,44 @@ $('#btnRefresh').addEventListener('click',async()=>{
     const h=cache.get(currentFileKey);
     if(h)preview(h,currentFileKey,currentFileKey.split('/').pop());
   }
-  toast('已刷新');
+  toast('Refreshed');
 });
 $('#btnOpenNewTab').addEventListener('click',openNewTab);
 $('#btnCopy').addEventListener('click',async()=>{
   if(!currentFileKey)return;
-  try{await navigator.clipboard.writeText(rootName+'/'+currentFileKey);toast('已复制：'+rootName+'/'+currentFileKey);}
-  catch{toast('复制失败（浏览器权限限制）');}
+  try{await navigator.clipboard.writeText(rootName+'/'+currentFileKey);toast('Copied: '+rootName+'/'+currentFileKey);}
+  catch{toast('Copy failed (browser permission restricted)');}
 });
-/* ================= 「所在目录」：定位文件所在文件夹 ================= */
-/* 浏览器安全限制：网页无法直接调起资源管理器，分两级行为——
-   ① 部署模式（index.html 放在授权根目录内）：可推算绝对路径，新标签打开该目录的 file:// 页（真实文件列表 + 地址栏可见完整路径）
-   ② 兜底（如当前实验：根目录 ≠ 本文件所在目录）：用系统原生「打开文件」窗口定位到该目录（看完按 Esc 关闭即可） */
+/* ================= "Show in Folder": locate the file's containing folder ================= */
+/* Browser security: a web page cannot launch the OS file manager directly, so there are two behaviors —
+   1) Deployed mode (index.html sits inside the authorized root): compute the absolute path and open that
+      folder's file:// page in a new tab (real file listing + full path visible in the address bar)
+   2) Fallback (e.g. this experiment, where the root differs from this file's directory): use the native
+      "open file" dialog to land in that folder (press Esc to dismiss when done) */
 function pageDirUrl(){return location.href.split('#')[0].replace(/\/[^/]*$/,'');}
 async function openContainingDir(){
-  if(!currentFileKey){toast('请先选择一个文件');return;}
+  if(!currentFileKey){toast('Select a file first');return;}
   const dirRel=dirOf(currentFileKey);
   const pageDir=pageDirUrl();
-  if(rootHandle&&pageDir.split('/').pop()===rootHandle.name){ // 部署模式判定
+  if(rootHandle&&pageDir.split('/').pop()===rootHandle.name){ // deployed-mode check
     const abs=pageDir+(dirRel?'/'+dirRel.split('/').map(encodeURIComponent).join('/'):'')+'/';
     const w=window.open(abs,'_blank');
-    if(w){toast('已打开所在目录（地址栏可复制完整路径）');return;}
-    toast('弹窗被拦截：请允许本页弹窗后重试');return;
+    if(w){toast('Opened the containing folder (full path visible in the address bar)');return;}
+    toast('Popup blocked: allow popups for this page, then try again');return;
   }
-  if(!window.showOpenFilePicker){toast('当前环境无法定位目录：请用真实 Edge 打开本文件');return;}
+  if(!window.showOpenFilePicker){toast('Cannot locate folders in this environment: open this file in real Edge');return;}
   try{
     const parent=await dirByKey(dirRel);
     const [fh]=await window.showOpenFilePicker({startIn:parent,multiple:false});
-    if(fh){ // 用户顺手选了文件 → 直接切换预览
+    if(fh){ // if the user happens to pick a file, switch the preview to it
       const k=(dirRel?dirRel+'/':'')+fh.name;
       cache.set(k,fh);currentFileKey=k;preview(fh,k,fh.name);
     }
-  }catch(e){ if(e.name!=='AbortError')toast('定位失败：'+e.message); }
+  }catch(e){ if(e.name!=='AbortError')toast('Failed to locate: '+e.message); }
 }
 $('#btnOpenDir').addEventListener('click',openContainingDir);
 
-/* ================= 启动：优先恢复上次根目录 ================= */
+/* ================= Startup: restore the last root folder when possible ================= */
 (async function init(){
   const saved=await dbLoad();
   if(saved&&saved.kind==='directory'){

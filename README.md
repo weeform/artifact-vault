@@ -2,8 +2,6 @@
 
 Browse AI-generated files like an Obsidian vault — HTML, Markdown, JSON, TXT, images, PDF, audio & video, rendered right in your browser. Zero install, read-only, nothing leaves your machine.
 
-像 Obsidian vault 一样浏览 AI 产出：HTML / Markdown / JSON / 图片 / PDF / 音视频开箱即看。零安装、只读、数据不出本机。
-
 <!-- TODO: screenshot (docs/screenshot.png) — file tree + rendered HTML preview -->
 
 ## Why
@@ -17,7 +15,7 @@ Artifact Vault takes the opposite trade: **no editing, maximum viewing compatibi
 1. Download [`index.html`](./index.html)
 2. Copy it into the root of any folder you want to browse
 3. Double-click to open it in Chrome or Edge
-4. Click **「选择根文件夹开始」** and grant read access — done
+4. Click **"📁 Choose Root Folder to Start"** and grant read access — done
 
 Each copy of `index.html` remembers its own authorized folder independently (stored in your browser's IndexedDB), so authorization is a one-time step per folder.
 
