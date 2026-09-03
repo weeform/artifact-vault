@@ -2,7 +2,7 @@
 
 Browse AI-generated files like an Obsidian vault — HTML, Markdown, JSON, TXT, images, PDF, audio & video, rendered right in your browser. Zero install, read-only, nothing leaves your machine.
 
-<!-- TODO: screenshot (docs/screenshot.png) — file tree + rendered HTML preview -->
+![Artifact Vault — file tree with rendered Markdown preview](docs/screenshot.png)
 
 ## Why
 
