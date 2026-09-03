@@ -4,6 +4,8 @@ Browse AI-generated files like an Obsidian vault — HTML, Markdown, JSON, TXT, 
 
 ![Artifact Vault — file tree with rendered Markdown preview](docs/screenshot.png)
 
+**[🌐 Try the live demo](https://weeform.github.io/artifact-vault/)** — or [download `index.html`](./index.html) to use it anywhere.
+
 ## Why
 
 AI tools constantly produce rich files — HTML reports, Markdown notes, JSON dumps, diagrams, images. Obsidian is great for editing Markdown, but it won't render your HTML, and it wants to own your folder as a vault.
