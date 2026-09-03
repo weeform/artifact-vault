@@ -25,14 +25,16 @@ Each copy of `index.html` remembers its own authorized folder independently (sto
 |----------|---------|-----------|
 | Markdown | `md` `markdown` `mdown` `mkd` | Fully rendered (marked + highlight.js) |
 | HTML | `html` `htm` `xhtml` | Fully rendered, local CSS inlined, relative images resolved |
-| Images | `png` `jpg` `gif` `webp` `svg` `avif` `bmp` `ico` | Native browser decoding |
+| Images | `png` `jpg` `jpeg` `gif` `webp` `svg` `avif` `bmp` `ico` | Native browser decoding |
 | Documents | `pdf` | Native PDF viewer |
 | Video | `mp4` `webm` `ogv` `mov` `m4v` | Native playback |
 | Audio | `mp3` `wav` `ogg` `flac` `m4a` `aac` `opus` | Native playback |
-| Code / Text | `json` `txt` `log` `csv` `yaml` `xml` `py` `js` `ts` `sh` … | Syntax highlighted, GBK/charset auto-detection |
+| Code / Text | `json` `txt` `log` `csv` `yaml` `xml` `py` `js` `ts` `sh` … | Syntax highlighted; charset auto-detection (BOM / declared encoding / GBK heuristic) |
 | Other | unknown extensions | Sniffed: shown as text, or marked as binary |
 
 Anything Obsidian leaves as raw text or refuses to open renders here.
+
+> **Media note:** the extension names a container — actual playback depends on the codec inside it. H.264/AAC, VP8/VP9, AV1, Opus and FLAC play natively in Chromium; HEVC and ProRes generally don't.
 
 ## Features
 

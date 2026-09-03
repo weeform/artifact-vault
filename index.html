@@ -1704,14 +1704,28 @@ async function openNewTab(){ // window.open must run synchronously inside the cl
   }catch(e){try{win.close();}catch{}toast('Failed to open: '+e.message);}
 }
 async function readTextSmart(f){
-  if(f.size>8*1048576)return new TextDecoder().decode(await f.slice(0,8*1048576).arrayBuffer());
-  const buf=await f.arrayBuffer();
+  const buf=await (f.size>8*1048576?f.slice(0,8*1048576):f).arrayBuffer();
+  return decodeText(buf);
+}
+function decodeText(buf){
+  // BOM first: authoritative for UTF-16 files
+  const b=new Uint8Array(buf);
+  if(b.length>=2&&b[0]===0xFF&&b[1]===0xFE)return new TextDecoder('utf-16le').decode(buf);
+  if(b.length>=2&&b[0]===0xFE&&b[1]===0xFF)return new TextDecoder('utf-16be').decode(buf);
+  // explicit charset declaration in the first 2048 bytes (HTML meta / XML declaration)
   const head=new TextDecoder().decode(buf.slice(0,2048));
   const m=head.match(/charset=["']?([\w-]+)/i);
   if(m&&!/^(utf-?8|iso-?8859-?1|us-ascii|windows-1252)$/i.test(m[1])){
     try{return new TextDecoder(m[1].toLowerCase().replace('gb2312','gbk')).decode(buf);}catch{}
   }
-  return new TextDecoder().decode(buf);
+  // strict UTF-8: legacy GBK bytes almost always violate it
+  try{return new TextDecoder('utf-8',{fatal:true}).decode(buf);}catch{}
+  // self-inflicted truncation: >8MB files are sliced, and the cut may land mid-multibyte-char;
+  // retry with up to 3 trailing bytes trimmed (succeeds only if that was the sole invalidity,
+  // so genuine GBK content still falls through)
+  for(const n of [1,2,3]){ try{return new TextDecoder('utf-8',{fatal:true}).decode(buf.slice(0,buf.byteLength-n));}catch{} }
+  // GB18030 (superset of GBK/GB2312): heuristic fallback for undeclared legacy Chinese text
+  return new TextDecoder('gb18030').decode(buf);
 }
 async function rewriteImages(container,baseRel){
   const imgs=Array.from(container.querySelectorAll('img'));
