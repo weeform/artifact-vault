@@ -1,0 +1,22 @@
+name: Feature request
+description: Suggest an idea for Artifact Vault
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues in English or 中文 are both welcome.
+
+        Check the [roadmap](../blob/main/README.md#roadmap) first — your idea may already be planned.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: What can't you do today, or what's painful?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: What would help?
+      description: Your idea. Leaving this blank is fine if you only know the problem.

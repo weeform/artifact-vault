@@ -1,0 +1,71 @@
+name: Bug report
+description: Something isn't working as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report!
+
+        - **Security problems: do not use this form.** See the [security policy](../blob/main/SECURITY.md) for private reporting instead.
+        - **Firefox / Safari:** directory access is not supported yet (Chromium only). Please check the README's Browser Support section before filing.
+
+        Issues in English or 中文 are both welcome.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you expected vs. what actually happened.
+    validations:
+      required: true
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: How were you using Artifact Vault?
+      options:
+        - Live demo (weeform.github.io/artifact-vault)
+        - Downloaded copy of index.html
+    validations:
+      required: true
+  - type: input
+    id: downloaded-when
+    attributes:
+      label: If a downloaded copy — roughly when did you download it?
+      description: The app does not show a version number yet; the download date helps identify the code you are running.
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Edge
+        - Other Chromium-based browser
+        - Firefox
+        - Safari
+    validations:
+      required: true
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser version
+      placeholder: e.g. Chrome 138
+    validations:
+      required: true
+  - type: input
+    id: file-type
+    attributes:
+      label: File involved (extension and rough size)
+      placeholder: e.g. .html, ~2 MB
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps — 1. Open … 2. Click … 3. …
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Console output
+      description: The most useful thing you can attach. Press F12 → Console tab and copy any red errors.
+      render: shell
