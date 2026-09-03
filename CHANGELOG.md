@@ -8,6 +8,7 @@ Initial public release.
 
 ### Added
 
+- Version badge in the top bar (`v0.1.0`) — cite it in bug reports
 - VS Code-style file tree — lazy loading, drag-to-resize, directory state preserved on refresh
 - Rendered previews — Markdown, HTML (local CSS inlined, relative images resolved), images, PDF, audio, video
 - Syntax-highlighted code/text with charset auto-detection (BOM / declared encoding / GBK heuristic)

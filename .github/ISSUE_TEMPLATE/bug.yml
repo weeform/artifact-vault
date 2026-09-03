@@ -28,10 +28,11 @@ body:
     validations:
       required: true
   - type: input
-    id: downloaded-when
+    id: app-version
     attributes:
-      label: If a downloaded copy — roughly when did you download it?
-      description: The app does not show a version number yet; the download date helps identify the code you are running.
+      label: App version shown in the top bar
+      description: Next to the app title, e.g. v0.1.0. If your copy shows none, write "none" — it predates version display.
+      placeholder: e.g. v0.1.0
   - type: dropdown
     id: browser
     attributes:
