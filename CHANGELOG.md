@@ -2,6 +2,12 @@
 
 Notable changes to Artifact Vault are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## Unreleased
+
+### Added
+
+- Mermaid diagram rendering — ` ```mermaid ` fences in Markdown render as diagrams (dark theme) in both the preview and the new-tab view; malformed diagrams fall back to the source with an error note. Diagrams are rendered to static SVG in the page before entering the sandboxed iframe, so no scripts are added to previews. Mermaid v11.17.2 vendored inline — `index.html` grows to ~3.7 MB.
+
 ## 0.1.0 — 2026-09-03
 
 Initial public release.

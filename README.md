@@ -25,7 +25,7 @@ Each copy of `index.html` remembers its own authorized folder independently (sto
 
 | Category | Formats | Rendering |
 |----------|---------|-----------|
-| Markdown | `md` `markdown` `mdown` `mkd` | Fully rendered (marked + highlight.js) |
+| Markdown | `md` `markdown` `mdown` `mkd` | Fully rendered (marked + highlight.js); `mermaid` code fences render as diagrams |
 | HTML | `html` `htm` `xhtml` | Fully rendered, local CSS inlined, relative images resolved |
 | Images | `png` `jpg` `jpeg` `gif` `webp` `svg` `avif` `bmp` `ico` | Native browser decoding |
 | Documents | `pdf` | Native PDF viewer |
@@ -41,7 +41,7 @@ Anything Obsidian leaves as raw text or refuses to open renders here.
 ## Features
 
 - **VS Code-style file tree** — lazy loading, drag-to-resize, directory state preserved on refresh
-- **Zero install, zero CDN** — no server, no build, no dependencies to install; all libraries are vendored into the file, so it works fully offline and on locked-down machines where you can't install software
+- **Zero install, zero CDN** — no server, no build, no dependencies to install; all libraries are vendored into the file (~3.7 MB with mermaid embedded), so it works fully offline and on locked-down machines where you can't install software
 - **New-tab view** — open any file in a clean standalone tab (no UI chrome), ideal for full-page screenshots; relative images are inlined so the document is fully self-contained
 - **Locate on disk** — jump to the file's containing folder
 - **Safe by design** — previews run in sandboxed iframes with scripts disabled; read-only access only
@@ -50,7 +50,7 @@ Anything Obsidian leaves as raw text or refuses to open renders here.
 
 - **Read-only** — uses the File System Access API in `read` mode; the page cannot write, move, or delete anything
 - **Local only** — no telemetry, no accounts, no upload path. Your files never leave the machine
-- **Zero CDN** — marked & highlight.js are vendored inline; the app itself makes no network requests. (Previewed documents may still load external images/CSS they reference — rendered inside the sandbox.)
+- **Zero CDN** — marked, highlight.js & mermaid are vendored inline; the app itself makes no network requests. (Previewed documents may still load external images/CSS they reference — rendered inside the sandbox.)
 - **Sandboxed previews** — HTML/Markdown render inside sandboxed iframes; embedded scripts do not execute
 - **Permission memory** — folder grants are stored locally in IndexedDB, one record per deployed copy
 
@@ -87,4 +87,4 @@ No, by design. Read-only is the safety guarantee that lets you point it at folde
 
 Released under the [MIT License](./LICENSE).
 
-Bundled libraries (vendored inline): [marked](https://github.com/markedjs/marked) v12.0.2 (MIT), [highlight.js](https://highlightjs.org/) v11.9.0 (BSD-3-Clause). Full license texts are embedded at the top of each vendored block in [`index.html`](./index.html).
+Bundled libraries (vendored inline): [marked](https://github.com/markedjs/marked) v12.0.2 (MIT), [highlight.js](https://highlightjs.org/) v11.9.0 (BSD-3-Clause), [mermaid](https://github.com/mermaid-js/mermaid) v11.17.2 (MIT, with bundled permissively-licensed dependencies: MIT / Apache-2.0 / MPL-2.0 dual). License texts/comments are embedded at the top of each vendored block in [`index.html`](./index.html).

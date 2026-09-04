@@ -8,3 +8,6 @@ Desktop.ini
 *~
 .vscode/
 .idea/
+
+# Ephemeral build/test artifacts (vendor splice, regression suite, smoke harness)
+scratch/
